@@ -2,7 +2,7 @@ import { useRouter } from "next/router"
 import Link from "next/link"
 
 
-export const ActiveLink = ({ text, href }) => {
+export const ActiveLink = ({ menu }) => {
 
   const style = {
     color: '#0070f3',
@@ -12,8 +12,16 @@ export const ActiveLink = ({ text, href }) => {
   const { asPath } = useRouter()
 
   return (
-    <Link href={ href }>
-      <a style={ asPath === href ? style : null }>{ text }</a>
-    </Link>
+    <>
+      {
+        menu && menu.map(({ text, href, index}) => {
+          return(
+            <Link key={index} href={ href }>
+              <a style={ asPath === href ? style : null }>{ text }</a>
+            </Link>
+          )
+        })
+      }
+    </>
   )
 }
